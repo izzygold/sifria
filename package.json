@@ -8,7 +8,7 @@
     "start": "node --experimental-strip-types server.ts"
   },
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "dependencies": {
     "@vercel/blob": "^2.8.2",
