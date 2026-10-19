@@ -2,9 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import express, { type Request, type Response } from "express";
-import { loadCatalog } from "./lib/catalog.ts";
-import { buildProfile, byRecent, recommend, searchBooks, toCard } from "./lib/recommend.ts";
-import { applyAction, type BookAction } from "./lib/store.ts";
+import { loadCatalog } from "../lib/catalog.ts";
+import { buildProfile, byRecent, recommend, searchBooks, toCard } from "../lib/recommend.ts";
+import { applyAction, type BookAction } from "../lib/store.ts";
 import {
   clearSessionCookie,
   legacyWaiting,
@@ -18,7 +18,7 @@ import {
   sessionCookie,
   userForToken,
   type PublicUser,
-} from "./lib/users.ts";
+} from "../lib/users.ts";
 
 function catalogFile(): string {
   const here = path.dirname(fileURLToPath(import.meta.url));

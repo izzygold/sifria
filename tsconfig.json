@@ -9,5 +9,5 @@
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["server.ts", "lib/**/*.ts"]
+  "include": ["src/server.ts", "lib/**/*.ts"]
 }
