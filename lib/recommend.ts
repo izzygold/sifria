@@ -6,8 +6,8 @@ export interface Suggestion {
   reason: string;
 }
 
-function exclusive(values: string[]): string | null {
-  const unique = [...new Set(values.filter(Boolean))];
+function exclusive<T extends string>(values: readonly T[]): T | null {
+  const unique = [...new Set(values.filter((value) => value.length > 0))];
   return unique.length === 1 ? unique[0] : null;
 }
 
