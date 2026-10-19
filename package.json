@@ -1,0 +1,21 @@
+{
+  "name": "sifria",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "מעקב קריאה והמלצות ספרים לפי קטלוג הספרייה",
+  "scripts": {
+    "start": "node --experimental-strip-types server.ts"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "csv-parse": "^5.6.0",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.15.3"
+  }
+}

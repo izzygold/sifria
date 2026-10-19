@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>הספרייה שלי</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="top">
+        <p class="eyebrow">קטלוג הספרייה אצלכם בבית</p>
+        <h1>הספרייה שלי</h1>
+        <p class="lede">למעלה הספרים שלקחתם ועודם אצלכם. מתחת, ספרים שעוד לא קראתם ושמתאימים למה שאהבתם.</p>
+        <nav class="views" aria-label="מעבר בין מסכים">
+          <button type="button" class="view-btn is-on" data-view="home">
+            <span class="view-title">אצלי עכשיו</span>
+            <span class="view-sub">מהספרייה, והמלצות</span>
+          </button>
+          <button type="button" class="view-btn" data-view="read">
+            <span class="view-title">ספרים שקראתי</span>
+            <span class="view-sub" id="read-count">לייק ודיסלייק</span>
+          </button>
+        </nav>
+        <label class="search">
+          <span>חיפוש בקטלוג</span>
+          <input id="q" type="search" placeholder="שם ספר או מחבר" autocomplete="off" />
+        </label>
+        <p class="profile" id="profile"></p>
+      </header>
+      <main id="app"></main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
+</html>
