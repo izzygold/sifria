@@ -12,13 +12,32 @@ const authError = document.querySelector("#auth-error");
 const userList = document.querySelector("#user-list");
 const legacyNote = document.querySelector("#legacy-note");
 const who = document.querySelector("#who");
+const layoutButton = document.querySelector("#layout");
+const layoutMode = document.querySelector("#layout-mode");
 
 const ui = {
   view: "home",
   query: "",
   busy: false,
   token: 0,
+  layout: localStorage.getItem("sifria-layout") === "thumbs" ? "thumbs" : "list",
 };
+
+function applyLayout() {
+  const thumbs = ui.layout === "thumbs";
+  library.classList.toggle("thumbs", thumbs);
+  layoutMode.textContent = thumbs ? "תמונות" : "תצוגה ראשונה";
+  layoutButton.classList.toggle("is-on", thumbs);
+  layoutButton.setAttribute("aria-pressed", thumbs ? "true" : "false");
+}
+
+applyLayout();
+
+layoutButton.addEventListener("click", () => {
+  ui.layout = ui.layout === "thumbs" ? "list" : "thumbs";
+  localStorage.setItem("sifria-layout", ui.layout);
+  applyLayout();
+});
 
 tabs.forEach((button) => {
   button.addEventListener("click", () => {
@@ -134,7 +153,7 @@ function actionButton(action, label, on, id) {
   return button;
 }
 
-function section(title, hint, books, layout) {
+function section(title, hint, books) {
   const block = document.createElement("section");
   block.className = "section";
   block.append(text("h2", "", title));
@@ -144,7 +163,7 @@ function section(title, hint, books, layout) {
   }
   if (hint) block.append(text("p", "hint", hint));
   const list = document.createElement("div");
-  list.className = layout === "row" ? "list row" : "list";
+  list.className = "list";
   books.forEach((book) => list.append(bookCard(book)));
   block.append(list);
   return block;
@@ -177,7 +196,6 @@ function renderHome(data) {
         ? "ספרים שסימנתם ומחכים שתקחו אותם מהספרייה."
         : "עוד אין ספרים שמחכים. לחצו «מחכה לספריה» על ספר.",
       data.waiting,
-      "row",
     ),
   );
   app.append(

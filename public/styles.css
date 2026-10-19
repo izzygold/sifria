@@ -117,7 +117,7 @@ h1 {
   font-size: 1.15rem;
 }
 
-.search input:focus, .view-btn:focus-visible, .act:focus-visible {
+.search input:focus, .view-btn:focus-visible, .act:focus-visible, .layout-btn:focus-visible, .logout:focus-visible {
   outline: 3px solid #e2a15a;
   outline-offset: 2px;
 }
@@ -257,6 +257,75 @@ h1 {
   gap: 12px;
 }
 
+.top-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.layout-btn {
+  display: grid;
+  justify-items: center;
+  min-height: 46px;
+  padding: 4px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 800;
+  line-height: 1.15;
+  cursor: pointer;
+}
+
+.layout-btn small {
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.layout-btn.is-on {
+  background: var(--ink);
+  color: #fffaf3;
+}
+
+#library.thumbs .list {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+#library.thumbs .book {
+  grid-template-columns: 1fr;
+  align-content: start;
+  gap: 10px;
+  padding: 10px;
+}
+
+#library.thumbs .cover {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+}
+
+#library.thumbs .book-title {
+  font-size: 0.98rem;
+}
+
+#library.thumbs .meta {
+  font-size: 0.82rem;
+}
+
+#library.thumbs .actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+#library.thumbs .act {
+  min-height: 40px;
+  padding: 4px 8px;
+  font-size: 0.78rem;
+  line-height: 1.2;
+  white-space: normal;
+}
+
 .logout {
   min-height: 46px;
   padding: 0 16px;
@@ -329,17 +398,6 @@ h1 {
   color: #fffaf3;
 }
 
-.list.row {
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-}
-
-.list.row .book {
-  flex: 0 0 min(340px, 86vw);
-}
-
 button.cover {
   border: 0;
   padding: 0;
@@ -410,4 +468,7 @@ button.cover {
   .view-btn { min-height: 78px; }
   .book { grid-template-columns: 74px 1fr; }
   .cover { width: 74px; height: 104px; }
+  #library.thumbs .list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #library.thumbs .book { grid-template-columns: 1fr; }
+  #library.thumbs .cover { width: 100%; height: auto; }
 }

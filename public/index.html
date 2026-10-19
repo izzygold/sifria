@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/styles.css?v=4" />
   </head>
   <body>
     <div id="gate" class="wrap gate" hidden>
@@ -36,7 +36,13 @@
       <header class="top">
         <div class="who-row">
           <p class="eyebrow" id="who">שלום</p>
-          <button type="button" id="logout" class="logout">יציאה</button>
+          <div class="top-actions">
+            <button type="button" id="layout" class="layout-btn" aria-pressed="false">
+              <span>סוג תצורה</span>
+              <small id="layout-mode">תצוגה ראשונה</small>
+            </button>
+            <button type="button" id="logout" class="logout">יציאה</button>
+          </div>
         </div>
         <h1>הספרייה שלי</h1>
         <p class="lede">למעלה הספרים שלקחתם ועודם אצלכם. מתחת, ספרים שעוד לא קראתם ושמתאימים למה שאהבתם.</p>
@@ -58,6 +64,6 @@
       </header>
       <main id="app"></main>
     </div>
-    <script src="/app.js"></script>
+    <script src="/app.js?v=4"></script>
   </body>
 </html>
