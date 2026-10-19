@@ -1,3 +1,6 @@
 node_modules/
 data/state.json
+data/accounts.json
+.vercel
 *.log
+.env*

@@ -10,9 +10,34 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <div class="wrap">
+    <div id="gate" class="wrap gate" hidden>
+      <p class="eyebrow">פרופיל לכל קורא</p>
+      <h1>מי קורא עכשיו?</h1>
+      <p class="lede">לכל משתמש הספרים שלו. השם יכול להיות בעברית, והסיסמה יכולה להיות פשוטה, גם 123.</p>
+      <div id="user-list" class="user-list"></div>
+      <form id="auth-form" class="auth-form">
+        <label>
+          שם משתמש
+          <input id="username" name="username" autocomplete="username" required />
+        </label>
+        <label>
+          סיסמה
+          <input id="password" name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <p id="auth-error" class="auth-error"></p>
+        <div class="auth-actions">
+          <button type="submit" class="view-btn is-on">כניסה</button>
+          <button type="button" id="register" class="view-btn">משתמש חדש</button>
+        </div>
+      </form>
+      <p id="legacy-note" class="hint" hidden>המשתמש הראשון שייווצר יקבל את הספרים שכבר סומנו במחשב הזה.</p>
+    </div>
+    <div id="library" class="wrap" hidden>
       <header class="top">
-        <p class="eyebrow">קטלוג הספרייה אצלכם בבית</p>
+        <div class="who-row">
+          <p class="eyebrow" id="who">שלום</p>
+          <button type="button" id="logout" class="logout">יציאה</button>
+        </div>
         <h1>הספרייה שלי</h1>
         <p class="lede">למעלה הספרים שלקחתם ועודם אצלכם. מתחת, ספרים שעוד לא קראתם ושמתאימים למה שאהבתם.</p>
         <nav class="views" aria-label="מעבר בין מסכים">

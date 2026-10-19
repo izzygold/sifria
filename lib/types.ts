@@ -22,6 +22,7 @@ export interface UserState {
   likes: Record<string, number>;
   dislikes: Record<string, number>;
   borrowed: Record<string, number>;
+  waiting: Record<string, number>;
 }
 
 export interface BookCard {
@@ -35,6 +36,7 @@ export interface BookCard {
   liked: boolean;
   disliked: boolean;
   borrowed: boolean;
+  waiting: boolean;
   reason: string;
   seriesName: string;
 }
@@ -44,6 +46,7 @@ export interface Profile {
   likeCount: number;
   dislikeCount: number;
   borrowedCount: number;
+  waitingCount: number;
   language: string;
   audience: string;
   note: string;

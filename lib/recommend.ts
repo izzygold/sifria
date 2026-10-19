@@ -37,6 +37,7 @@ export function buildProfile(books: Book[], state: UserState): Profile {
     likeCount: Object.keys(state.likes).length,
     dislikeCount: Object.keys(state.dislikes).length,
     borrowedCount: Object.keys(state.borrowed).length,
+    waitingCount: Object.keys(state.waiting ?? {}).length,
     language: language ?? "",
     audience: audienceLabel(audience),
     note: parts.length
@@ -85,6 +86,8 @@ export function recommend(books: Book[], state: UserState, limit = 24): Suggesti
   );
   const readIds = new Set<string>([...Object.keys(state.likes), ...Object.keys(state.dislikes)]);
   const borrowedIds = new Set(Object.keys(state.borrowed));
+  const waitingIds = new Set(Object.keys(state.waiting ?? {}));
+  const heldIds = new Set([...borrowedIds, ...waitingIds]);
   const likedAuthors = new Set(liked.map((book) => book.authorKey).filter(Boolean));
 
   const bySeries = new Map<string, Book[]>();
@@ -106,7 +109,7 @@ export function recommend(books: Book[], state: UserState, limit = 24): Suggesti
   const scores = new Map<number, Suggestion & { score: number }>();
   const consider = (book: Book, score: number, reason: string, allowUnknown: boolean): void => {
     const key = String(book.id);
-    if (readIds.has(key) || borrowedIds.has(key)) return;
+    if (readIds.has(key) || heldIds.has(key)) return;
     if (book.authorKey && dislikedAuthors.has(book.authorKey)) return;
     if (!allowed(book, language, audience, allowUnknown)) return;
     const current = scores.get(book.id);
@@ -118,7 +121,7 @@ export function recommend(books: Book[], state: UserState, limit = 24): Suggesti
     const later = (bySeries.get(seriesId) ?? [])
       .filter((book) => book.volume != null && book.volume > Math.max(...volumes))
       .sort((left, right) => (left.volume ?? 0) - (right.volume ?? 0));
-    const nextAtHome = later[0] != null && borrowedIds.has(String(later[0].id));
+    const nextAtHome = later[0] != null && heldIds.has(String(later[0].id));
     later.slice(0, 6).forEach((book, index) => {
       consider(book, nextBonuses[index] ?? 60, seriesPhrase(book, index === 0 && !nextAtHome), true);
     });
@@ -149,7 +152,7 @@ export function recommend(books: Book[], state: UserState, limit = 24): Suggesti
   if ((language || audience) && [...scores.values()].filter((item) => item.score >= 36).length < 8) {
     const pool = books.filter((book) => {
       const key = String(book.id);
-      if (readIds.has(key) || borrowedIds.has(key)) return false;
+      if (readIds.has(key) || heldIds.has(key)) return false;
       if (book.authorKey && dislikedAuthors.has(book.authorKey)) return false;
       if (!allowed(book, language, audience, false)) return false;
       if (unfinishedSeries(book)) return false;
@@ -203,6 +206,7 @@ export function toCard(book: Book, state: UserState, reason = ""): BookCard {
     liked: Boolean(state.likes[key]),
     disliked: Boolean(state.dislikes[key]),
     borrowed: Boolean(state.borrowed[key]),
+    waiting: Boolean(state.waiting?.[key]),
     reason,
     seriesName: book.seriesName ?? "",
   };
